@@ -29,6 +29,7 @@ public class Grid : MonoBehaviour
 	
 	void Start ()
     {
+        // populating dictionary with piece prefabs types
         piecePrefabDict = new Dictionary<PieceType, GameObject>();
         for (int i = 0; i < piecePrefabs.Length; i++)
         {
@@ -38,6 +39,7 @@ public class Grid : MonoBehaviour
             }
         }
 
+        // instantiate backgrounds
         for (int x = 0; x < xDim; x++)
         {
             for (int y = 0; y < yDim; y++)
@@ -46,23 +48,29 @@ public class Grid : MonoBehaviour
                 background.transform.parent = transform;
             }
         }
-
+        
+        // instantiating pieces
         pieces = new GamePiece[xDim, yDim];
         for (int x = 0; x < xDim; x++)
         {
             for (int y = 0; y < yDim; y++)
             {
-                GameObject newPiece = (GameObject)Instantiate(piecePrefabDict[PieceType.NORMAL], GetWorldPosition(x,y), Quaternion.identity);
+                GameObject newPiece = (GameObject)Instantiate(piecePrefabDict[PieceType.NORMAL], Vector3.zero, Quaternion.identity);
                 newPiece.name = "Piece(" + x + "," + y + ")";
                 newPiece.transform.parent = transform;
 
                 pieces[x, y] = newPiece.GetComponent<GamePiece>();
                 pieces[x, y].Init(x, y, this, PieceType.NORMAL);
+
+                if (pieces[x, y].IsMovable())
+                {
+                    pieces[x, y].MovableComponent.Move(x, y);
+                }
             }
         }
 	}
     
-    Vector2 GetWorldPosition (int x, int y)
+    public Vector2 GetWorldPosition (int x, int y)
     {
         return new Vector2(transform.position.x - xDim / 2.0f + x,
                            transform.position.y + yDim / 2.0f - y);

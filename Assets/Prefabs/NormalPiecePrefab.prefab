@@ -25,6 +25,7 @@ GameObject:
   m_Component:
   - component: {fileID: 454114}
   - component: {fileID: 114194706781505038}
+  - component: {fileID: 114524560389968172}
   m_Layer: 0
   m_Name: NormalPiecePrefab
   m_TagString: Untagged
@@ -125,5 +126,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ca042eac47f904142b8b5db092e780db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114524560389968172
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 174492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cec4bb0314bd7304d82ed06acc345202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
