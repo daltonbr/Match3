@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 454114}
   - component: {fileID: 114194706781505038}
   - component: {fileID: 114524560389968172}
+  - component: {fileID: 114658452562033968}
   m_Layer: 0
   m_Name: NormalPiecePrefab
   m_TagString: Untagged
@@ -139,3 +140,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cec4bb0314bd7304d82ed06acc345202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114658452562033968
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 174492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c25adb5f867fc24386f09962f4576ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colorSprites:
+  - color: 0
+    sprite: {fileID: 21300000, guid: b7a68c654b9c3a44c9d3df16fa71210c, type: 3}
+  - color: 1
+    sprite: {fileID: 21300000, guid: 87f999246d3fddf45ba4e81ba09f33b0, type: 3}
+  - color: 2
+    sprite: {fileID: 21300000, guid: d2049f97c0c1429408fdf67d3a2e51cd, type: 3}
+  - color: 3
+    sprite: {fileID: 21300000, guid: 9baf5b7a8690c354bae03b86a91e3775, type: 3}
+  - color: 4
+    sprite: {fileID: 21300000, guid: a2af2b453925f814f8cb44271e2dd116, type: 3}
+  - color: 5
+    sprite: {fileID: 21300000, guid: 9cae86fff3ec91049b3248769d723885, type: 3}
