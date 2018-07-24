@@ -24,6 +24,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 454114}
+  - component: {fileID: 114194706781505038}
   m_Layer: 0
   m_Name: NormalPiecePrefab
   m_TagString: Untagged
@@ -115,3 +116,14 @@ Prefab:
   m_SourcePrefab: {fileID: 0}
   m_RootGameObject: {fileID: 174492}
   m_IsPrefabAsset: 1
+--- !u!114 &114194706781505038
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 174492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca042eac47f904142b8b5db092e780db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
