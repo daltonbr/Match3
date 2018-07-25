@@ -157,7 +157,7 @@ public class Grid : MonoBehaviour
                                             {
                                                 break;
                                             }
-                                            else if (!pieceAbove.IsMovable() && pieceAbove.Type != PieceType.EMPTY)
+                                            else if (/*!pieceAbove.IsMovable() && */pieceAbove.Type != PieceType.EMPTY)
                                             {
                                                 hasPieceAbove = false;
                                                 break;
@@ -244,7 +244,6 @@ public class Grid : MonoBehaviour
                 pieces[piece1.X, piece1.Y] = piece1;
                 pieces[piece2.X, piece2.Y] = piece2;
             }
-
         }
     }
 
@@ -290,8 +289,7 @@ public class Grid : MonoBehaviour
                     }
                     else
                     { // right
-                        x = newX + xOffset;
-                        break;
+                        x = newX + xOffset;                        
                     }
 
                     // out-of-bounds
@@ -339,8 +337,7 @@ public class Grid : MonoBehaviour
                     }
                     else
                     { // Down
-                        y = newY + yOffset;
-                        break;
+                        y = newY + yOffset;                        
                     }
 
                     // out-of-bounds
