@@ -8,6 +8,7 @@ public class Grid : MonoBehaviour
     {
         EMPTY,
         NORMAL,
+        BUBBLE,
         COUNT,
     };
 
@@ -60,6 +61,9 @@ public class Grid : MonoBehaviour
                 SpawnNewPiece(x, y, PieceType.EMPTY);
             }
         }
+
+        Destroy(pieces[4, 4].gameObject);
+        SpawnNewPiece(4, 4, PieceType.BUBBLE);
 
         StartCoroutine(Fill());
 	}
