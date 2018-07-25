@@ -31,8 +31,11 @@ public class Grid : MonoBehaviour
     private GamePiece[,] pieces;
 
     private bool inverse = false;
-	
-	void Start ()
+
+    private GamePiece pressedPiece;
+    private GamePiece enteredPiece;
+
+    void Start()
     {
         // populating dictionary with piece prefabs types
         piecePrefabDict = new Dictionary<PieceType, GameObject>();
@@ -53,7 +56,7 @@ public class Grid : MonoBehaviour
                 background.transform.parent = transform;
             }
         }
-        
+
         // instantiating pieces
         pieces = new GamePiece[xDim, yDim];
         for (int x = 0; x < xDim; x++)
@@ -86,8 +89,8 @@ public class Grid : MonoBehaviour
         SpawnNewPiece(4, 0, PieceType.BUBBLE);
 
         StartCoroutine(Fill());
-	}
-    
+    }
+
     public IEnumerator Fill()
     {
         while (FillStep())
@@ -187,7 +190,7 @@ public class Grid : MonoBehaviour
             if (pieceBelow.Type == PieceType.EMPTY)
             {
                 Destroy(pieceBelow.gameObject);
-                GameObject newPiece = (GameObject)Instantiate(piecePrefabDict[PieceType.NORMAL], GetWorldPosition(x, -1), Quaternion.identity, this.transform);                
+                GameObject newPiece = (GameObject)Instantiate(piecePrefabDict[PieceType.NORMAL], GetWorldPosition(x, -1), Quaternion.identity, this.transform);
 
                 pieces[x, 0] = newPiece.GetComponent<GamePiece>();
                 pieces[x, 0].Init(x, -1, this, PieceType.NORMAL);
@@ -200,19 +203,58 @@ public class Grid : MonoBehaviour
         return movedPiece;
     }
 
-    public Vector2 GetWorldPosition (int x, int y)
+    public Vector2 GetWorldPosition(int x, int y)
     {
         return new Vector2(transform.position.x - xDim / 2.0f + x,
                            transform.position.y + yDim / 2.0f - y);
     }
 
-    public GamePiece SpawnNewPiece (int x, int y, PieceType type)
+    public GamePiece SpawnNewPiece(int x, int y, PieceType type)
     {
         GameObject newPiece = (GameObject)Instantiate(piecePrefabDict[type], GetWorldPosition(x, y), Quaternion.identity, this.transform);
         pieces[x, y] = newPiece.GetComponent<GamePiece>();
         pieces[x, y].Init(x, y, this, type);
 
         return pieces[x, y];
+    }
+
+    public bool IsAdjacent(GamePiece piece1, GamePiece piece2)
+    {
+        return (piece1.X==piece2.X && (int)Mathf.Abs(piece1.Y - piece2.Y) == 1)
+            || (piece1.Y == piece2.Y && (int)Mathf.Abs(piece1.X - piece2.X) == 1);
+    }
+
+    public void SwapPieces(GamePiece piece1, GamePiece piece2)
+    {
+        if (piece1.IsMovable() && piece2.IsMovable())
+        {
+            pieces[piece1.X, piece1.Y] = piece2;
+            pieces[piece2.X, piece2.Y] = piece1;
+
+            int piece1X = piece1.X;
+            int piece1Y = piece1.Y;
+
+            piece1.MovableComponent.Move(piece2.X, piece2.Y, fillTime);
+            piece2.MovableComponent.Move(piece1X, piece1Y, fillTime);
+        }
+    }
+
+    public void PressPiece(GamePiece piece)
+    {
+        pressedPiece = piece;
+    }
+
+    public void EnterPiece(GamePiece piece)
+    {
+        enteredPiece = piece;
+    }
+
+    public void ReleasePiece()
+    {
+        if (IsAdjacent (pressedPiece, enteredPiece))
+        {
+            SwapPieces(pressedPiece, enteredPiece);
+        }
     }
 
 }
