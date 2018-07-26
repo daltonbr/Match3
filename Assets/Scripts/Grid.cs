@@ -95,8 +95,19 @@ public class Grid : MonoBehaviour
     {
         while (FillStep())
         {
-            inverse = !inverse;
-            yield return new WaitForSeconds(fillTime);
+            bool needsRefil = true;
+
+            while (needsRefil)
+            {
+                yield return new WaitForSeconds(fillTime);
+                while (FillStep())
+                {
+                    inverse = !inverse;
+                    yield return new WaitForSeconds(fillTime);
+                }
+
+                needsRefil = ClearAllValidMatches();
+            }
         }
     }
 
@@ -238,6 +249,10 @@ public class Grid : MonoBehaviour
 
                 piece1.MovableComponent.Move(piece2.X, piece2.Y, fillTime);
                 piece2.MovableComponent.Move(piece1X, piece1Y, fillTime);
+
+                ClearAllValidMatches();
+
+                StartCoroutine(Fill());
             }
             else
             {
@@ -263,6 +278,35 @@ public class Grid : MonoBehaviour
         {
             SwapPieces(pressedPiece, enteredPiece);
         }
+    }
+
+    public bool ClearAllValidMatches()
+    {
+        bool needsRefill = false;
+
+        for (int y = 0; y < yDim; y++)
+        {
+            for (int x = 0; x < xDim; x++)
+            {
+                if (pieces[x, y].IsClearable())
+                {
+                    List<GamePiece> match = GetMatch(pieces[x, y], x, y);
+
+                    if (match != null)
+                    {
+                        for (int i = 0; i < match.Count; i++)
+                        {
+                            if (ClearPiece(match[i].X, match[i].Y))
+                            {
+                                needsRefill = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return needsRefill;
     }
 
     public List<GamePiece> GetMatch(GamePiece piece, int newX, int newY)
@@ -475,6 +519,19 @@ public class Grid : MonoBehaviour
         }
 
         return null;
+    }
+
+    public bool ClearPiece(int x, int y)
+    {
+        if (pieces[x, y].IsClearable() && !pieces[x, y].ClearableComponent.IsBeingCleared)
+        {
+            pieces[x, y].ClearableComponent.Clear();
+            SpawnNewPiece(x, y, PieceType.EMPTY);
+
+            return true;
+        }
+
+        return false;
     }
 
 }
