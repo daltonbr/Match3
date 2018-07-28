@@ -9,6 +9,8 @@ public class Grid : MonoBehaviour
         EMPTY,
         NORMAL,
         BUBBLE,
+        ROW_CLEAR,
+        COLUMN_CLEAR,
         COUNT,
     };
 
@@ -252,6 +254,9 @@ public class Grid : MonoBehaviour
 
                 ClearAllValidMatches();
 
+                pressedPiece = null;
+                enteredPiece = null;
+
                 StartCoroutine(Fill());
             }
             else
@@ -294,11 +299,39 @@ public class Grid : MonoBehaviour
 
                     if (match != null)
                     {
+                        PieceType specialPieceType = PieceType.COUNT;
+                        GamePiece randomPiece = match[Random.Range(0, match.Count)];
+                        int specialPieceX = randomPiece.X;
+                        int specialPieceY = randomPiece.Y;
+
+                        // spawning special pieces
+                        if (match.Count == 4)   // TODO why not >4 ?
+                        {
+                            if (pressedPiece == null || enteredPiece == null)
+                            {
+                                specialPieceType = (PieceType) Random.Range((int) PieceType.ROW_CLEAR, (int) PieceType.COLUMN_CLEAR);
+                            }
+                            else if (pressedPiece.Y == enteredPiece.Y)
+                            {
+                                specialPieceType = PieceType.ROW_CLEAR;
+                            }
+                            else
+                            {
+                                specialPieceType = PieceType.COLUMN_CLEAR;
+                            }
+                        }
+
                         for (int i = 0; i < match.Count; i++)
                         {
                             if (ClearPiece(match[i].X, match[i].Y))
                             {
                                 needsRefill = true;
+
+                                if (match[i] == pressedPiece || match[i] == enteredPiece)
+                                {                                    
+                                    specialPieceX = match[i].X;
+                                    specialPieceY = match[i].Y;
+                                }
                             }
                         }
                     }

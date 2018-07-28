@@ -238,6 +238,10 @@ MonoBehaviour:
     prefab: {fileID: 174492, guid: f6090629d79e1a34db1e37f9f517d5a2, type: 2}
   - type: 2
     prefab: {fileID: 1667288452069994, guid: 8df7af0603d2c9c4db7722655dcc1014, type: 2}
+  - type: 3
+    prefab: {fileID: 1685163007815210, guid: 003115432e1a29e4990fd2d4be266d78, type: 2}
+  - type: 4
+    prefab: {fileID: 1744477852393382, guid: e856d71a91ffb53409236526ecee4bda, type: 2}
   backgroundPrefab: {fileID: 126596, guid: 86f7705ed2388c64294da188eff4bc1b, type: 2}
 --- !u!1 &606057589
 GameObject:
