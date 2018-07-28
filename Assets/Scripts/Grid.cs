@@ -34,6 +34,7 @@ public class Grid : MonoBehaviour
     public int yDim;
     public float fillTime;
 
+    // TODO Get automatically or at least make an assertion
     public Level level;
 
     public PiecePrefab[] piecePrefabs;

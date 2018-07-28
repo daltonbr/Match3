@@ -11,6 +11,7 @@ public class Level : MonoBehaviour
         MOVES,
     };
 
+    // TODO make an assertion and/or get automatically
     public Grid grid;
 
     public int score1Star;
