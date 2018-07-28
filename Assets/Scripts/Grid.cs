@@ -11,6 +11,7 @@ public class Grid : MonoBehaviour
         BUBBLE,
         ROW_CLEAR,
         COLUMN_CLEAR,
+        RAINBOW,
         COUNT,
     };
 
@@ -316,7 +317,7 @@ public class Grid : MonoBehaviour
                         int specialPieceY = randomPiece.Y;
 
                         // spawning special pieces
-                        if (match.Count == 4)   // TODO why not >4 ?
+                        if (match.Count == 4)
                         {
                             if (pressedPiece == null || enteredPiece == null)
                             {

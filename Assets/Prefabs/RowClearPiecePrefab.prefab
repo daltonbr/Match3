@@ -39,8 +39,8 @@ GameObject:
   - component: {fileID: 114818196846311316}
   - component: {fileID: 114699305780004302}
   - component: {fileID: 61163314065986320}
-  - component: {fileID: 114719279668629860}
   - component: {fileID: 95321145490798010}
+  - component: {fileID: 114325371315596282}
   m_Layer: 0
   m_Name: RowClearPiecePrefab
   m_TagString: Untagged
@@ -129,6 +129,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca042eac47f904142b8b5db092e780db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114325371315596282
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1685163007815210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1af9a5a21632bd4bb9b5a4ca8b592c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clearAnimation: {fileID: 7400000, guid: 6a673afd418e34b498932892ee1d6fbc, type: 2}
+  isRow: 1
 --- !u!114 &114699305780004302
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -153,18 +166,6 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: a2af2b453925f814f8cb44271e2dd116, type: 3}
   - color: 5
     sprite: {fileID: 21300000, guid: 9cae86fff3ec91049b3248769d723885, type: 3}
---- !u!114 &114719279668629860
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1685163007815210}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08f63264f24353c40ad5727e20ddb206, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clearAnimation: {fileID: 7400000, guid: 6a673afd418e34b498932892ee1d6fbc, type: 2}
 --- !u!114 &114818196846311316
 MonoBehaviour:
   m_ObjectHideFlags: 1
