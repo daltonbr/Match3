@@ -13,6 +13,6 @@
     {
         base.Clear();
 
-        // Clear color
+        piece.GridRef.ClearColor(color);
     }
 }

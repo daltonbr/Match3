@@ -210,5 +210,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colorSprites:
-  - color: 6
-    sprite: {fileID: 21300000, guid: 1821a6662eede764c9e9e39ad5fb798a, type: 3}
+  - color: 0
+    sprite: {fileID: 21300000, guid: b7a68c654b9c3a44c9d3df16fa71210c, type: 3}
+  - color: 1
+    sprite: {fileID: 21300000, guid: 87f999246d3fddf45ba4e81ba09f33b0, type: 3}
+  - color: 2
+    sprite: {fileID: 21300000, guid: d2049f97c0c1429408fdf67d3a2e51cd, type: 3}
+  - color: 3
+    sprite: {fileID: 21300000, guid: 9baf5b7a8690c354bae03b86a91e3775, type: 3}
+  - color: 4
+    sprite: {fileID: 21300000, guid: a2af2b453925f814f8cb44271e2dd116, type: 3}
+  - color: 5
+    sprite: {fileID: 21300000, guid: 9cae86fff3ec91049b3248769d723885, type: 3}
