@@ -254,6 +254,17 @@ public class Grid : MonoBehaviour
 
                 ClearAllValidMatches();
 
+                // special pieces get cleared, event if they are not matched
+                if (piece1.Type == PieceType.ROW_CLEAR || piece1.Type == PieceType.COLUMN_CLEAR)
+                {
+                    ClearPiece(piece1.X, piece1.Y);
+                }
+
+                if (piece2.Type == PieceType.ROW_CLEAR || piece2.Type == PieceType.COLUMN_CLEAR)
+                {
+                    ClearPiece(piece2.X, piece2.Y);
+                }
+
                 pressedPiece = null;
                 enteredPiece = null;
 
@@ -332,6 +343,18 @@ public class Grid : MonoBehaviour
                                     specialPieceX = match[i].X;
                                     specialPieceY = match[i].Y;
                                 }
+                            }
+                        }
+
+                        if (specialPieceType != PieceType.COUNT)
+                        {
+                            Destroy(pieces[specialPieceX, specialPieceY]);
+                            GamePiece newPiece = SpawnNewPiece(specialPieceX, specialPieceY, specialPieceType);
+
+                            if ((specialPieceType == PieceType.ROW_CLEAR || specialPieceType == PieceType.COLUMN_CLEAR) 
+                                && newPiece.IsColored() && match[0].IsColored())
+                            {
+                                newPiece.ColorComponent.SetColor(match[0].ColorComponent.Color);
                             }
                         }
                     }
