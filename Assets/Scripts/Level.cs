@@ -43,7 +43,8 @@ public class Level : MonoBehaviour
 
     public virtual void OnPieceCleared(GamePiece piece)
     {
-        // Update score
+        currentScore += piece.score;
+        Debug.Log("Score: " + currentScore);
     }
 
 }
