@@ -619,4 +619,20 @@ public class Grid : MonoBehaviour
         }
     }
 
+    public void ClearRow(int row)
+    {
+        for (int x = 0; x < xDim; x++)
+        {
+            ClearPiece(x, row);
+        }
+    }
+
+    public void ClearColumn(int column)
+    {
+        for (int y = 0; y < yDim; y++)
+        {
+            ClearPiece(column, y);
+        }
+    }
+
 }

@@ -19,7 +19,7 @@ public class ClearablePiece : MonoBehaviour
         piece = GetComponent<GamePiece>();
     }
 
-    public void Clear()
+    public virtual void Clear()
     {
         isBeingCleared = true;
         StartCoroutine(ClearCoroutine());
