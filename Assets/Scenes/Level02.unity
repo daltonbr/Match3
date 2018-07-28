@@ -228,8 +228,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a62fb356db7d2834b87559058d1855a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xDim: 6
-  yDim: 7
+  xDim: 9
+  yDim: 9
   fillTime: 0.1
   level: {fileID: 1773144088}
   piecePrefabs:
@@ -246,7 +246,46 @@ MonoBehaviour:
   - type: 5
     prefab: {fileID: 1052986968358228, guid: 76cf5fcb1fcbe0f4a8673d6ce36da32c, type: 2}
   backgroundPrefab: {fileID: 126596, guid: 86f7705ed2388c64294da188eff4bc1b, type: 2}
-  initialPieces: []
+  initialPieces:
+  - type: 2
+    x: 1
+    y: 1
+  - type: 2
+    x: 2
+    y: 2
+  - type: 2
+    x: 3
+    y: 3
+  - type: 2
+    x: 4
+    y: 4
+  - type: 2
+    x: 5
+    y: 5
+  - type: 2
+    x: 6
+    y: 6
+  - type: 2
+    x: 7
+    y: 7
+  - type: 2
+    x: 1
+    y: 7
+  - type: 2
+    x: 2
+    y: 6
+  - type: 2
+    x: 3
+    y: 5
+  - type: 2
+    x: 5
+    y: 3
+  - type: 2
+    x: 6
+    y: 2
+  - type: 2
+    x: 7
+    y: 0
 --- !u!1 &606057589
 GameObject:
   m_ObjectHideFlags: 0
@@ -256,7 +295,6 @@ GameObject:
   m_Component:
   - component: {fileID: 606057594}
   - component: {fileID: 606057593}
-  - component: {fileID: 606057592}
   - component: {fileID: 606057591}
   - component: {fileID: 606057590}
   m_Layer: 0
@@ -274,13 +312,6 @@ AudioListener:
   m_GameObject: {fileID: 606057589}
   m_Enabled: 1
 --- !u!124 &606057591
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 606057589}
-  m_Enabled: 1
---- !u!92 &606057592
 Behaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -364,15 +395,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1773144087}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c5a84fd32077c94eb38cbf259d2ac2c, type: 3}
+  m_Script: {fileID: 11500000, guid: 1f5f347c58158f340a397a6934e6a1ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   grid: {fileID: 581336197}
-  score1Star: 15000
-  score2Star: 18000
-  score3Star: 21000
-  numMoves: 14
-  targetScore: 15000
+  score1Star: 25000
+  score2Star: 27000
+  score3Star: 30000
+  numMoves: 10
+  obstacleTypes: 02000000
 --- !u!4 &1773144089
 Transform:
   m_ObjectHideFlags: 0

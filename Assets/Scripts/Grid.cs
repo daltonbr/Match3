@@ -701,4 +701,22 @@ public class Grid : MonoBehaviour
         gameOver = true;
     }
 
+    public List<GamePiece> GetPiecesOfType(PieceType type)
+    {
+        var piecesOfType = new List<GamePiece>();
+
+        for (int x = 0; x < xDim; x++)
+        {
+            for (int y = 0; y < yDim; y++)
+            {
+                if (pieces[x, y].Type == type)
+                {
+                    piecesOfType.Add(pieces[x, y]);
+                }
+            }
+        }
+
+        return piecesOfType;
+    }
+
 }
