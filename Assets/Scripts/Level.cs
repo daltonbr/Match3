@@ -29,16 +29,18 @@ public class Level : MonoBehaviour
     public virtual void GameWin()
     {
         Debug.Log("You Win!");
+        grid.GameOver();
     }
 
     public virtual void GameLose()
     {
         Debug.Log("You Lose!");
+        grid.GameOver();
     }
     
     public virtual void OnMove()
     {
-
+        Debug.Log("You moved!");
     }
 
     public virtual void OnPieceCleared(GamePiece piece)

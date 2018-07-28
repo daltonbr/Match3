@@ -26,6 +26,8 @@ public class Grid : MonoBehaviour
     public int yDim;
     public float fillTime;
 
+    public Level level;
+
     public PiecePrefab[] piecePrefabs;
     public GameObject backgroundPrefab;
 
@@ -37,6 +39,8 @@ public class Grid : MonoBehaviour
 
     private GamePiece pressedPiece;
     private GamePiece enteredPiece;
+
+    private bool gameOver = false;
 
     void Start()
     {
@@ -240,6 +244,8 @@ public class Grid : MonoBehaviour
 
     public void SwapPieces(GamePiece piece1, GamePiece piece2)
     {
+        if (gameOver) { return; }
+
         if (piece1.IsMovable() && piece2.IsMovable())
         {
             pieces[piece1.X, piece1.Y] = piece2;
@@ -295,6 +301,9 @@ public class Grid : MonoBehaviour
                 enteredPiece = null;
 
                 StartCoroutine(Fill());
+
+                // TODO consider doing this using delegates
+                level.OnMove();
             }
             else
             {
@@ -683,6 +692,11 @@ public class Grid : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void GameOver()
+    {
+        gameOver = true;
     }
 
 }

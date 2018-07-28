@@ -21,6 +21,7 @@ public class ClearablePiece : MonoBehaviour
 
     public virtual void Clear()
     {
+        piece.GridRef.level.OnPieceCleared(piece);
         isBeingCleared = true;
         StartCoroutine(ClearCoroutine());
     }
