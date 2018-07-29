@@ -281,16 +281,15 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114611698856205176, guid: 83a339d1755599245a215019673a6f74,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 376322593}
     - target: {fileID: 1379965604785764, guid: 83a339d1755599245a215019673a6f74, type: 2}
       propertyPath: m_Name
       value: Button01
       objectReference: {fileID: 0}
-    - target: {fileID: 114214938263914570, guid: 83a339d1755599245a215019673a6f74,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: da8b3b11981ffa447ba099fb0cb19b50,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83a339d1755599245a215019673a6f74, type: 2}
   m_IsPrefabAsset: 0
@@ -379,8 +378,9 @@ GameObject:
   - component: {fileID: 376322591}
   - component: {fileID: 376322590}
   - component: {fileID: 376322589}
+  - component: {fileID: 376322593}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: LevelSelectCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -465,6 +465,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &376322593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 376322588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3774077f17435e04aad561f797d9a058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &427180590 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 224857818678697110, guid: 83a339d1755599245a215019673a6f74,
@@ -571,6 +582,27 @@ Prefab:
       propertyPath: m_Name
       value: Button03
       objectReference: {fileID: 0}
+    - target: {fileID: 114611698856205176, guid: 83a339d1755599245a215019673a6f74,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 376322593}
+    - target: {fileID: 114611698856205176, guid: 83a339d1755599245a215019673a6f74,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnButtonPress
+      objectReference: {fileID: 0}
+    - target: {fileID: 114611698856205176, guid: 83a339d1755599245a215019673a6f74,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Level03
+      objectReference: {fileID: 0}
+    - target: {fileID: 114214938263914570, guid: 83a339d1755599245a215019673a6f74,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3ba4a4c8d3bb88849be6a6daba973fbd,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83a339d1755599245a215019673a6f74, type: 2}
   m_IsPrefabAsset: 0
@@ -696,6 +728,21 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 5e836bee0520ad64880837c8db166483,
         type: 3}
+    - target: {fileID: 114611698856205176, guid: 83a339d1755599245a215019673a6f74,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 376322593}
+    - target: {fileID: 114611698856205176, guid: 83a339d1755599245a215019673a6f74,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnButtonPress
+      objectReference: {fileID: 0}
+    - target: {fileID: 114611698856205176, guid: 83a339d1755599245a215019673a6f74,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Level02
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83a339d1755599245a215019673a6f74, type: 2}
   m_IsPrefabAsset: 0

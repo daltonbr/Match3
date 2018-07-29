@@ -246,6 +246,7 @@ MonoBehaviour:
   - type: 5
     prefab: {fileID: 1052986968358228, guid: 76cf5fcb1fcbe0f4a8673d6ce36da32c, type: 2}
   backgroundPrefab: {fileID: 126596, guid: 86f7705ed2388c64294da188eff4bc1b, type: 2}
+  initialPieces: []
 --- !u!1 &606057589
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,6 +368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grid: {fileID: 0}
+  hud: {fileID: 0}
   score1Star: 0
   score2Star: 0
   score3Star: 0
