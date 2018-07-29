@@ -8,6 +8,7 @@ public class HUD : MonoBehaviour
 {
     // TODO get this automatically and/or make an assertion
     public Level level;
+    public GameOver gameOver;
 
     public Text remainingText;
     public Text remainingSubText;
@@ -16,9 +17,7 @@ public class HUD : MonoBehaviour
     public Text scoreText;
     public Image[] stars;
 
-    private int starIdx = 0;
-
-    private bool isGameOver = false;
+    private int starIdx = 0;    
 
     void Start ()
 	{
@@ -106,11 +105,11 @@ public class HUD : MonoBehaviour
 
     public void OnGameWin(int score)
     {
-        isGameOver = true;
+        gameOver.ShowWin(score, starIdx);        
     }
 
-    public void OnGameLose(int score)
+    public void OnGameLose()
     {
-        isGameOver = true;
+        gameOver.ShowLose();        
     }
 }

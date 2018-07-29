@@ -53,6 +53,13 @@ public class Grid : MonoBehaviour
 
     private bool gameOver = false;
 
+    private bool isFilling = false;
+
+    public bool IsFilling
+    {
+        get { return isFilling; }
+    }
+
     void Awake()
     {
         // populating dictionary with piece prefabs types
@@ -102,23 +109,23 @@ public class Grid : MonoBehaviour
     }
 
     public IEnumerator Fill()
-    {
-        while (FillStep())
+    {        
+        bool needsRefil = true;
+        isFilling = true;
+
+        while (needsRefil)
         {
-            bool needsRefil = true;
-
-            while (needsRefil)
+            yield return new WaitForSeconds(fillTime);
+            while (FillStep())
             {
+                inverse = !inverse;
                 yield return new WaitForSeconds(fillTime);
-                while (FillStep())
-                {
-                    inverse = !inverse;
-                    yield return new WaitForSeconds(fillTime);
-                }
-
-                needsRefil = ClearAllValidMatches();
             }
+
+            needsRefil = ClearAllValidMatches();
         }
+
+        isFilling = false;
     }
 
     /// <summary>

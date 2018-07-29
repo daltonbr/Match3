@@ -1142,6 +1142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: {fileID: 0}
+  gameOver: {fileID: 114760862318321596}
   remainingText: {fileID: 114614540546603646}
   remainingSubText: {fileID: 114383202612275260}
   targetText: {fileID: 114805096943555670}

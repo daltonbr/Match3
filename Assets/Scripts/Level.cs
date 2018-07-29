@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.Experimental.UIElements;
 
 public class Level : MonoBehaviour
@@ -23,6 +24,8 @@ public class Level : MonoBehaviour
 
     protected int currentScore;
 
+    protected bool didWin;
+
     void Start()
     {
         hud.SetScore(currentScore);
@@ -35,16 +38,16 @@ public class Level : MonoBehaviour
 
     public virtual void GameWin()
     {
-        Debug.Log("You Win!");
-        hud.OnGameWin(currentScore);
         grid.GameOver();
+        didWin = true;
+        StartCoroutine(WaitForGridFill());
     }
 
     public virtual void GameLose()
-    {
-        Debug.Log("You Lose!");
-        hud.OnGameLose(currentScore);
+    {        
         grid.GameOver();
+        didWin = false;
+        StartCoroutine(WaitForGridFill());
     }
     
     public virtual void OnMove()
@@ -58,4 +61,20 @@ public class Level : MonoBehaviour
         hud.SetScore(currentScore);
     }
 
+    protected virtual IEnumerator WaitForGridFill()
+    {
+        while (grid.IsFilling)
+        {
+            yield return 0;            
+        }
+
+        if (didWin)
+        {
+            hud.OnGameWin(currentScore);
+        }
+        else
+        {
+            hud.OnGameLose();
+        }
+    }
 }
