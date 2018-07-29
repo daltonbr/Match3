@@ -13,6 +13,7 @@ public class Level : MonoBehaviour
 
     // TODO make an assertion and/or get automatically
     public Grid grid;
+    public HUD hud;
 
     public int score1Star;
     public int score2Star;
@@ -22,6 +23,11 @@ public class Level : MonoBehaviour
 
     protected int currentScore;
 
+    void Start()
+    {
+        hud.SetScore(currentScore);
+    }
+
     public LevelType Type
     {
         get { return type; }
@@ -30,12 +36,14 @@ public class Level : MonoBehaviour
     public virtual void GameWin()
     {
         Debug.Log("You Win!");
+        hud.OnGameWin(currentScore);
         grid.GameOver();
     }
 
     public virtual void GameLose()
     {
         Debug.Log("You Lose!");
+        hud.OnGameLose(currentScore);
         grid.GameOver();
     }
     
@@ -47,7 +55,7 @@ public class Level : MonoBehaviour
     public virtual void OnPieceCleared(GamePiece piece)
     {
         currentScore += piece.score;
-        Debug.Log("Score: " + currentScore);
+        hud.SetScore(currentScore);
     }
 
 }

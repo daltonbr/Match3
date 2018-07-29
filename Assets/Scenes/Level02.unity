@@ -285,6 +285,12 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e48363766c8c65a40931017ebcedffa0, type: 2}
   m_IsPrefabAsset: 0
+--- !u!114 &105229770 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114701695403606658, guid: e48363766c8c65a40931017ebcedffa0,
+    type: 2}
+  m_PrefabInternal: {fileID: 105229769}
+  m_Script: {fileID: 11500000, guid: 3996169cac6578944ad7416c86e58378, type: 3}
 --- !u!1 &455804008
 GameObject:
   m_ObjectHideFlags: 0
@@ -383,7 +389,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 581336195}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.1, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -400,8 +406,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a62fb356db7d2834b87559058d1855a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xDim: 8
-  yDim: 8
+  xDim: 9
+  yDim: 9
   fillTime: 0.1
   level: {fileID: 1773144088}
   piecePrefabs:
@@ -418,7 +424,34 @@ MonoBehaviour:
   - type: 5
     prefab: {fileID: 1052986968358228, guid: 76cf5fcb1fcbe0f4a8673d6ce36da32c, type: 2}
   backgroundPrefab: {fileID: 126596, guid: 86f7705ed2388c64294da188eff4bc1b, type: 2}
-  initialPieces: []
+  initialPieces:
+  - type: 2
+    x: 1
+    y: 4
+  - type: 2
+    x: 3
+    y: 4
+  - type: 2
+    x: 5
+    y: 4
+  - type: 2
+    x: 7
+    y: 4
+  - type: 2
+    x: 2
+    y: 6
+  - type: 2
+    x: 4
+    y: 6
+  - type: 2
+    x: 6
+    y: 6
+  - type: 2
+    x: 8
+    y: 6
+  - type: 2
+    x: 8
+    y: 5
 --- !u!1 &606057589
 GameObject:
   m_ObjectHideFlags: 0
@@ -528,15 +561,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1773144087}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a114b8d88930754f9eaff488f37a093, type: 3}
+  m_Script: {fileID: 11500000, guid: 1f5f347c58158f340a397a6934e6a1ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   grid: {fileID: 581336197}
-  score1Star: 50000
-  score2Star: 60000
-  score3Star: 75000
-  timeInSeconds: 90
-  targetScore: 50000
+  hud: {fileID: 105229770}
+  score1Star: 10000
+  score2Star: 20000
+  score3Star: 30000
+  numMoves: 15
+  obstacleTypes: 02000000
 --- !u!4 &1773144089
 Transform:
   m_ObjectHideFlags: 0
