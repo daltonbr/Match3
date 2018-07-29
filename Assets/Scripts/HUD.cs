@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class HUD : MonoBehaviour
 {
@@ -105,7 +106,11 @@ public class HUD : MonoBehaviour
 
     public void OnGameWin(int score)
     {
-        gameOver.ShowWin(score, starIdx);        
+        gameOver.ShowWin(score, starIdx);
+        if (starIdx > PlayerPrefs.GetInt(SceneManager.GetActiveScene().name, 0))
+        {
+            PlayerPrefs.SetInt(SceneManager.GetActiveScene().name, starIdx);
+        }
     }
 
     public void OnGameLose()
