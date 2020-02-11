@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class LevelSelect : MonoBehaviour
 {
@@ -13,7 +11,7 @@ public class LevelSelect : MonoBehaviour
 
     public ButtonPlayerPrefs[] buttons;
 
-    void Start()
+    private void Start()
     {
         for (int i = 0; i < buttons.Length; i++)
         {

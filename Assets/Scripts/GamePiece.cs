@@ -1,104 +1,87 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class GamePiece : MonoBehaviour
 {
-
     public int score;
 
-    private int x;
-    private int y;
+    private int _x;
+    private int _y;
 
     public int X
     {
-        get { return x; }
-        set { if (IsMovable()) { x = value; } }
+        get => _x;
+        set { if (IsMovable()) { _x = value; } }
     }
 
     public int Y
     {
-        get { return y; }
-        set { if (IsMovable()) { y = value; } }
+        get => _y;
+        set { if (IsMovable()) { _y = value; } }
     }
+    
+    private PieceType _type;
 
-    private Grid.PieceType type;
+    public PieceType Type => _type;
 
-    public Grid.PieceType Type
-    {
-        get { return type; }
-    }
+    private Grid _grid;
 
-    private Grid grid;
+    public Grid GridRef => _grid;
 
-    public Grid GridRef
-    {
-        get { return grid; }
-    }
+    private MovablePiece _movableComponent;
 
-    private MovablePiece movableComponent;
+    public MovablePiece MovableComponent => _movableComponent;
 
-    public MovablePiece MovableComponent
-    {
-        get { return movableComponent; }
-    }
+    private ColorPiece _colorComponent;
 
-    private ColorPiece colorComponent;
+    public ColorPiece ColorComponent => _colorComponent;
 
-    public ColorPiece ColorComponent
-    {
-        get { return colorComponent; }
-    }
+    private ClearablePiece _clearableComponent;
 
-    private ClearablePiece clearableComponent;
-
-    public ClearablePiece ClearableComponent
-    {
-        get { return clearableComponent; }
-    }
+    public ClearablePiece ClearableComponent => _clearableComponent;
 
     private void Awake()
     {
-        movableComponent = this.GetComponent<MovablePiece>();
-        colorComponent = this.GetComponent<ColorPiece>();
-        clearableComponent = GetComponent<ClearablePiece>();
+        _movableComponent = GetComponent<MovablePiece>();
+        _colorComponent = GetComponent<ColorPiece>();
+        _clearableComponent = GetComponent<ClearablePiece>();
     }
 
-    public void Init(int _x, int _y, Grid _grid, Grid.PieceType _type)
+    public void Init(int x, int y, Grid grid, PieceType type)
     {
-        x = _x;
-        y = _y;
-        grid = _grid;
-        type = _type;
+        _x = x;
+        _y = y;
+        _grid = grid;
+        _type = type;
     }
 
     private void OnMouseEnter()
     {
-        grid.EnterPiece(this);
+        _grid.EnterPiece(this);
     }
 
     private void OnMouseDown()
     {
-        grid.PressPiece(this);
+        _grid.PressPiece(this);
     }
 
     private void OnMouseUp()
     {
-        grid.ReleasePiece();
+        _grid.ReleasePiece();
     }
 
     public bool IsMovable()
     {
-        return movableComponent != null;
+        return _movableComponent != null;
     }
 
     public bool IsColored()
     {
-        return colorComponent != null;
+        return _colorComponent != null;
     }
 
     public bool IsClearable()
     {
-        return clearableComponent != null;
+        return _clearableComponent != null;
     }
 
 }

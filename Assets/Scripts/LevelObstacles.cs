@@ -1,36 +1,36 @@
-﻿using UnityEngine;
-
-public class LevelObstacles : Level
+﻿public class LevelObstacles : Level
 {
 
     public int numMoves;
-    public Grid.PieceType[] obstacleTypes;
+    public PieceType[] obstacleTypes;
 
-    private int movesUsed = 0;
-    private int numObstaclesLeft;
+    private const int ScorePerPieceCleared = 1000;
+    
+    private int _movesUsed = 0;
+    private int _numObstaclesLeft;
 
-	void Start ()
+    private void Start ()
 	{
 	    type = LevelType.OBSTACLE;
 
 	    for (int i = 0; i < obstacleTypes.Length; i++)
 	    {
-	        numObstaclesLeft += grid.GetPiecesOfType(obstacleTypes[i]).Count;
+	        _numObstaclesLeft += grid.GetPiecesOfType(obstacleTypes[i]).Count;
 	    }
 
         hud.SetLevelType(type);
         hud.SetScore(currentScore);
-        hud.SetTarget(numObstaclesLeft);
+        hud.SetTarget(_numObstaclesLeft);
         hud.SetRemaining(numMoves);
 	}
 
     public override void OnMove()
     {
-        movesUsed++;
+        _movesUsed++;
 
-        hud.SetRemaining(numMoves - movesUsed);
+        hud.SetRemaining(numMoves - _movesUsed);
 
-        if (numMoves - movesUsed == 0 && numObstaclesLeft > 0)
+        if (numMoves - _movesUsed == 0 && _numObstaclesLeft > 0)
         {
             GameLose();
         }
@@ -42,19 +42,15 @@ public class LevelObstacles : Level
 
         for (int i = 0; i < obstacleTypes.Length; i++)
         {
-            if (obstacleTypes[i] == piece.Type)
-            {
-                numObstaclesLeft--;
-                hud.SetTarget(numObstaclesLeft);
-
-                if (numObstaclesLeft == 0)
-                {
-                    // TODO move this multiplier to a variable
-                    currentScore += 1000 * (numMoves - movesUsed);
-                    hud.SetScore(currentScore);
-                    GameWin();
-                }
-            }
+            if (obstacleTypes[i] != piece.Type) continue;
+            
+            _numObstaclesLeft--;
+            hud.SetTarget(_numObstaclesLeft);
+            if (_numObstaclesLeft != 0) continue;
+            
+            currentScore += ScorePerPieceCleared * (numMoves - _movesUsed);
+            hud.SetScore(currentScore);
+            GameWin();
         }
     }
 }

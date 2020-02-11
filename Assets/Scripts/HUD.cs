@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -18,21 +15,14 @@ public class HUD : MonoBehaviour
     public Text scoreText;
     public Image[] stars;
 
-    private int starIdx = 0;    
+    private int _starIndex = 0;
 
-    void Start ()
+    private void Start ()
 	{
 	    for (int i = 0; i < stars.Length; i++)
-	    {
-	        if (i == starIdx)
-	        {
-	            stars[i].enabled = true;
-	        }
-	        else
-	        {
-	            stars[i].enabled = false;
-	        }
-	    }
+        {
+            stars[i].enabled = i == _starIndex;
+        }
 	}
 
     public void SetScore(int score)
@@ -57,17 +47,9 @@ public class HUD : MonoBehaviour
         for (int i = 0; i < stars.Length; i++)
         {
             stars[i].enabled = (i == visibleStar);
-            //if (i == visibleStar)
-            //{
-            //    stars[i].enabled = true;
-            //}
-            //else
-            //{
-            //    stars[i].enabled = false;
-            //}
         }
 
-        starIdx = visibleStar;
+        _starIndex = visibleStar;
     }
 
     public void SetTarget(int target)
@@ -85,31 +67,31 @@ public class HUD : MonoBehaviour
         remainingText.text = remaining;
     }
 
-    public void SetLevelType(Level.LevelType type)
+    public void SetLevelType(LevelType type)
     {
-        if (type == Level.LevelType.MOVES)
+        switch (type)
         {
-            remainingSubText.text = "moves remaining";
-            targetSubtext.text = "target score";
-        }
-        else if (type == Level.LevelType.OBSTACLE)
-        {
-            remainingSubText.text = "moves remaining";
-            targetSubtext.text = "bubbles remaining";
-        }
-        else if (type == Level.LevelType.TIMER)
-        {
-            remainingSubText.text = "time remaining";
-            targetSubtext.text = "target score";
+            case LevelType.MOVES:
+                remainingSubText.text = "moves remaining";
+                targetSubtext.text = "target score";
+                break;
+            case LevelType.OBSTACLE:
+                remainingSubText.text = "moves remaining";
+                targetSubtext.text = "bubbles remaining";
+                break;
+            case LevelType.TIMER:
+                remainingSubText.text = "time remaining";
+                targetSubtext.text = "target score";
+                break;
         }
     }
 
     public void OnGameWin(int score)
     {
-        gameOver.ShowWin(score, starIdx);
-        if (starIdx > PlayerPrefs.GetInt(SceneManager.GetActiveScene().name, 0))
+        gameOver.ShowWin(score, _starIndex);
+        if (_starIndex > PlayerPrefs.GetInt(SceneManager.GetActiveScene().name, 0))
         {
-            PlayerPrefs.SetInt(SceneManager.GetActiveScene().name, starIdx);
+            PlayerPrefs.SetInt(SceneManager.GetActiveScene().name, _starIndex);
         }
     }
 

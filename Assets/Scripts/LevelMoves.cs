@@ -1,14 +1,12 @@
-﻿using UnityEngine;
-
-public class LevelMoves : Level
+﻿public class LevelMoves : Level
 {
 
     public int numMoves;
     public int targetScore;
 
-    private int movesUsed = 0;
+    private int _movesUsed = 0;
 
-    void Start()
+    private void Start()
     {
         type = LevelType.MOVES;
 
@@ -20,20 +18,19 @@ public class LevelMoves : Level
 
     public override void OnMove()
     {
-        movesUsed++;
+        _movesUsed++;
 
-        hud.SetRemaining(numMoves - movesUsed);
+        hud.SetRemaining(numMoves - _movesUsed);
 
-        if (numMoves - movesUsed == 0)
+        if (numMoves - _movesUsed != 0) return;
+        
+        if (currentScore >= targetScore)
         {
-            if (currentScore >= targetScore)
-            {
-                GameWin();
-            }
-            else
-            {
-                GameLose();
-            }
+            GameWin();
+        }
+        else
+        {
+            GameLose();
         }
     }
 }

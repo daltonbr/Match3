@@ -10,7 +10,7 @@ public class GameOver : MonoBehaviour
     public Text scoreText;
     public Image[] stars;
 
-    void Start ()
+    private void Start ()
 	{
 		screenParent.SetActive(false);
 

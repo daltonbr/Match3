@@ -5,16 +5,13 @@ public class ClearablePiece : MonoBehaviour
 {
     public AnimationClip clearAnimation;
 
-    private bool isBeingCleared = false;
+    private bool _isBeingCleared = false;
 
-    public bool IsBeingCleared
-    {
-        get { return isBeingCleared; }
-    }
+    public bool IsBeingCleared => _isBeingCleared;
 
     protected GamePiece piece;
 
-    void Awake()
+    private void Awake()
     {
         piece = GetComponent<GamePiece>();
     }
@@ -22,7 +19,7 @@ public class ClearablePiece : MonoBehaviour
     public virtual void Clear()
     {
         piece.GridRef.level.OnPieceCleared(piece);
-        isBeingCleared = true;
+        _isBeingCleared = true;
         StartCoroutine(ClearCoroutine());
     }
 

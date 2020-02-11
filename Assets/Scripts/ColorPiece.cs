@@ -1,22 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class ColorPiece : MonoBehaviour
 {
-
-    public enum ColorType
-    {
-        YELLOW,
-        PURPLE,
-        RED,
-        BLUE,
-        GREEN,
-        PINK,
-        ANY,
-        COUNT
-    };
-
     [System.Serializable]
     public struct ColorSprite
     {
@@ -26,45 +12,42 @@ public class ColorPiece : MonoBehaviour
 
     public ColorSprite[] colorSprites;
 
-    private ColorType color;
+    private ColorType _color;
 
     public ColorType Color
     {
-        get { return color; }
-        set { SetColor(value); }
+        get => _color;
+        set => SetColor(value);
     }
 
-    public int NumColors
-    {
-        get { return colorSprites.Length; }
-    }
+    public int NumColors => colorSprites.Length;
 
-    private SpriteRenderer sprite;
-    private Dictionary<ColorType, Sprite> colorSpriteDict;
+    private SpriteRenderer _sprite;
+    private Dictionary<ColorType, Sprite> _colorSpriteDict;
 
-	void Awake ()
+    private void Awake ()
     {
-        sprite = transform.Find("piece").GetComponent<SpriteRenderer>();
+        _sprite = transform.Find("piece").GetComponent<SpriteRenderer>();
 
         // instantiating and populating a Dictionary of all Color Types / Sprites (for fast lookup)
-        colorSpriteDict = new Dictionary<ColorType, Sprite>();
+        _colorSpriteDict = new Dictionary<ColorType, Sprite>();
 
         for (int i = 0; i < colorSprites.Length; i++)
         {
-            if (!colorSpriteDict.ContainsKey (colorSprites[i].color))
+            if (!_colorSpriteDict.ContainsKey (colorSprites[i].color))
             {
-                colorSpriteDict.Add(colorSprites[i].color, colorSprites[i].sprite);
+                _colorSpriteDict.Add(colorSprites[i].color, colorSprites[i].sprite);
             }
         }
 	}
 
     public void SetColor(ColorType newColor)
     {
-        color = newColor;
+        _color = newColor;
 
-        if (colorSpriteDict.ContainsKey(newColor))
+        if (_colorSpriteDict.ContainsKey(newColor))
         {
-            sprite.sprite = colorSpriteDict[newColor];
+            _sprite.sprite = _colorSpriteDict[newColor];
         }
     }
 	
