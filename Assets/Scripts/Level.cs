@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.Experimental.UIElements;
 
 public class Level : MonoBehaviour
 {
@@ -26,15 +25,12 @@ public class Level : MonoBehaviour
 
     protected bool didWin;
 
-    void Start()
+    private void Start()
     {
         hud.SetScore(currentScore);
     }
 
-    public LevelType Type
-    {
-        get { return type; }
-    }
+    public LevelType Type => type;
 
     public virtual void GameWin()
     {
@@ -65,7 +61,7 @@ public class Level : MonoBehaviour
     {
         while (grid.IsFilling)
         {
-            yield return 0;            
+            yield return null;
         }
 
         if (didWin)
