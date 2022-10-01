@@ -13,7 +13,6 @@ namespace Match3
             _piece = GetComponent<GamePiece>();
         }
 
-
         public void Move(int newX, int newY, float time)
         {
             if (_moveCoroutine != null)

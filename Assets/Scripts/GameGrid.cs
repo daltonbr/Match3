@@ -36,16 +36,14 @@ namespace Match3
 
         private GamePiece[,] _pieces;
 
-        private bool _inverse = false;
+        private bool _inverse;
 
         private GamePiece _pressedPiece;
         private GamePiece _enteredPiece;
 
         private bool _gameOver;
 
-        private bool _isFilling;
-
-        public bool IsFilling => _isFilling;
+        public bool IsFilling { get; private set; }
 
         private void Awake()
         {
@@ -97,10 +95,10 @@ namespace Match3
 
         private IEnumerator Fill()
         {        
-            bool needsRefil = true;
-            _isFilling = true;
+            bool needsRefill = true;
+            IsFilling = true;
 
-            while (needsRefil)
+            while (needsRefill)
             {
                 yield return new WaitForSeconds(fillTime);
                 while (FillStep())
@@ -109,10 +107,10 @@ namespace Match3
                     yield return new WaitForSeconds(fillTime);
                 }
 
-                needsRefil = ClearAllValidMatches();
+                needsRefill = ClearAllValidMatches();
             }
 
-            _isFilling = false;
+            IsFilling = false;
         }
 
         /// <summary>
@@ -200,7 +198,7 @@ namespace Match3
                 if (pieceBelow.Type != PieceType.Empty) continue;
             
                 Destroy(pieceBelow.gameObject);
-                GameObject newPiece = (GameObject)Instantiate(_piecePrefabDict[PieceType.Normal], GetWorldPosition(x, -1), Quaternion.identity, this.transform);
+                GameObject newPiece = Instantiate(_piecePrefabDict[PieceType.Normal], GetWorldPosition(x, -1), Quaternion.identity, this.transform);
 
                 _pieces[x, 0] = newPiece.GetComponent<GamePiece>();
                 _pieces[x, 0].Init(x, -1, this, PieceType.Normal);
@@ -214,24 +212,23 @@ namespace Match3
 
         public Vector2 GetWorldPosition(int x, int y)
         {
-            return new Vector2(transform.position.x - xDim / 2.0f + x,
+            return new Vector2(
+                transform.position.x - xDim / 2.0f + x,
                 transform.position.y + yDim / 2.0f - y);
         }
 
         private GamePiece SpawnNewPiece(int x, int y, PieceType type)
         {
-            GameObject newPiece = (GameObject)Instantiate(_piecePrefabDict[type], GetWorldPosition(x, y), Quaternion.identity, this.transform);
+            GameObject newPiece = Instantiate(_piecePrefabDict[type], GetWorldPosition(x, y), Quaternion.identity, this.transform);
             _pieces[x, y] = newPiece.GetComponent<GamePiece>();
             _pieces[x, y].Init(x, y, this, type);
 
             return _pieces[x, y];
         }
 
-        private static bool IsAdjacent(GamePiece piece1, GamePiece piece2)
-        {
-            return (piece1.X==piece2.X && (int)Mathf.Abs(piece1.Y - piece2.Y) == 1)
-                   || (piece1.Y == piece2.Y && (int)Mathf.Abs(piece1.X - piece2.X) == 1);
-        }
+        private static bool IsAdjacent(GamePiece piece1, GamePiece piece2) =>
+            (piece1.X == piece2.X && Mathf.Abs(piece1.Y - piece2.Y) == 1) ||
+            (piece1.Y == piece2.Y && Mathf.Abs(piece1.X - piece2.X) == 1);
 
         private void SwapPieces(GamePiece piece1, GamePiece piece2)
         {
@@ -242,8 +239,10 @@ namespace Match3
             _pieces[piece1.X, piece1.Y] = piece2;
             _pieces[piece2.X, piece2.Y] = piece1;
 
-            if (GetMatch(piece1, piece2.X, piece2.Y) != null || GetMatch(piece2, piece1.X, piece1.Y) != null
-                                                             || piece1.Type == PieceType.Rainbow || piece2.Type == PieceType.Rainbow)
+            if (GetMatch(piece1, piece2.X, piece2.Y) != null || 
+                GetMatch(piece2, piece1.X, piece1.Y) != null ||
+                piece1.Type == PieceType.Rainbow ||
+                piece2.Type == PieceType.Rainbow)
             {
                 int piece1X = piece1.X;
                 int piece1Y = piece1.Y;
@@ -302,15 +301,9 @@ namespace Match3
             }
         }
 
-        public void PressPiece(GamePiece piece)
-        {
-            _pressedPiece = piece;
-        }
+        public void PressPiece(GamePiece piece) => _pressedPiece = piece;
 
-        public void EnterPiece(GamePiece piece)
-        {
-            _enteredPiece = piece;
-        }
+        public void EnterPiece(GamePiece piece) => _enteredPiece = piece;
 
         public void ReleasePiece()
         {
@@ -360,16 +353,16 @@ namespace Match3
                         specialPieceType = PieceType.Rainbow;
                     }
 
-                    for (int i = 0; i < match.Count; i++)
+                    foreach (var gamePiece in match)
                     {
-                        if (!ClearPiece(match[i].X, match[i].Y)) continue;
+                        if (!ClearPiece(gamePiece.X, gamePiece.Y)) continue;
                     
                         needsRefill = true;
 
-                        if (match[i] != _pressedPiece && match[i] != _enteredPiece) continue;
+                        if (gamePiece != _pressedPiece && gamePiece != _enteredPiece) continue;
                     
-                        specialPieceX = match[i].X;
-                        specialPieceY = match[i].Y;
+                        specialPieceX = gamePiece.X;
+                        specialPieceY = gamePiece.Y;
                     }
 
                     // Setting their colors
@@ -436,10 +429,7 @@ namespace Match3
 
             if (horizontalPieces.Count >= 3)
             {
-                for (int i = 0; i < horizontalPieces.Count; i++)
-                {
-                    matchingPieces.Add(horizontalPieces[i]);
-                }
+                matchingPieces.AddRange(horizontalPieces);
             }
 
             // Traverse vertically if we found a match (for L and T shape)
@@ -484,10 +474,7 @@ namespace Match3
                     }
                     else
                     {
-                        for (int j = 0; j < verticalPieces.Count; j++)
-                        {
-                            matchingPieces.Add(verticalPieces[j]);
-                        }
+                        matchingPieces.AddRange(verticalPieces);
                         break;
                     }
                 }
@@ -537,10 +524,7 @@ namespace Match3
 
             if (verticalPieces.Count >= 3)
             {
-                for (int i = 0; i < verticalPieces.Count; i++)
-                {
-                    matchingPieces.Add(verticalPieces[i]);
-                }
+                matchingPieces.AddRange(verticalPieces);
             }
 
             // Traverse horizontally if we found a match (for L and T shape)
@@ -585,10 +569,7 @@ namespace Match3
                     }
                     else
                     {
-                        for (int j = 0; j < horizontalPieces.Count; j++)
-                        {
-                            matchingPieces.Add(horizontalPieces[j]);
-                        }
+                        matchingPieces.AddRange(horizontalPieces);
                         break;
                     }
                 }
@@ -669,10 +650,7 @@ namespace Match3
             }
         }
 
-        public void GameOver()
-        {
-            _gameOver = true;
-        }
+        public void GameOver() => _gameOver = true;
 
         public List<GamePiece> GetPiecesOfType(PieceType type)
         {

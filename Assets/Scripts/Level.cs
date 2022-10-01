@@ -25,14 +25,14 @@ namespace Match3
 
         public LevelType Type => type;
 
-        public virtual void GameWin()
+        protected virtual void GameWin()
         {
             gameGrid.GameOver();
             _didWin = true;
             StartCoroutine(WaitForGridFill());
         }
 
-        public virtual void GameLose()
+        protected virtual void GameLose()
         {        
             gameGrid.GameOver();
             _didWin = false;
@@ -41,7 +41,6 @@ namespace Match3
     
         public virtual void OnMove()
         {
-            Debug.Log("You moved!");
         }
 
         public virtual void OnPieceCleared(GamePiece piece)

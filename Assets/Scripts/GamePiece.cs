@@ -56,35 +56,16 @@ namespace Match3
             _type = type;
         }
 
-        private void OnMouseEnter()
-        {
-            _gameGrid.EnterPiece(this);
-        }
+        private void OnMouseEnter() => _gameGrid.EnterPiece(this);
 
-        private void OnMouseDown()
-        {
-            _gameGrid.PressPiece(this);
-        }
+        private void OnMouseDown() => _gameGrid.PressPiece(this);
 
-        private void OnMouseUp()
-        {
-            _gameGrid.ReleasePiece();
-        }
+        private void OnMouseUp() => _gameGrid.ReleasePiece();
 
-        public bool IsMovable()
-        {
-            return _movableComponent != null;
-        }
+        public bool IsMovable() => _movableComponent != null;
 
-        public bool IsColored()
-        {
-            return _colorComponent != null;
-        }
+        public bool IsColored() => _colorComponent != null;
 
-        public bool IsClearable()
-        {
-            return _clearableComponent != null;
-        }
-
+        public bool IsClearable() => _clearableComponent != null;
     }
 }

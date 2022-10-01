@@ -53,20 +53,11 @@ namespace Match3
             _starIndex = visibleStar;
         }
 
-        public void SetTarget(int target)
-        {
-            targetText.text = target.ToString();
-        }
+        public void SetTarget(int target) => targetText.text = target.ToString();
 
-        public void SetRemaining(int remaining)
-        {
-            remainingText.text = remaining.ToString();
-        }
+        public void SetRemaining(int remaining) => remainingText.text = remaining.ToString();
 
-        public void SetRemaining(string remaining)
-        {
-            remainingText.text = remaining;
-        }
+        public void SetRemaining(string remaining) => remainingText.text = remaining;
 
         public void SetLevelType(LevelType type)
         {

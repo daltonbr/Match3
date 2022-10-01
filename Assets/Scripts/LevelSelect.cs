@@ -19,10 +19,10 @@ namespace Match3
             {
                 int score = PlayerPrefs.GetInt(buttons[i].playerPrefKey, 0);
 
-                for (int starIdx = 1; starIdx <= 3; starIdx++)
+                for (int starIndex = 1; starIndex <= 3; starIndex++)
                 {
-                    Transform star = buttons[i].gameObject.transform.Find("star" + starIdx);
-                    star.gameObject.SetActive(starIdx <= score);                
+                    Transform star = buttons[i].gameObject.transform.Find($"star{starIndex}");
+                    star.gameObject.SetActive(starIndex <= score);                
                 }
             }
         }

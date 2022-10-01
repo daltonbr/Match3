@@ -8,9 +8,7 @@ namespace Match3
         public int timeInSeconds;
         public int targetScore;
 
-        private float timer;
-        private bool timeOut = false;
-
+        private float _timer;
 
         private void Start ()
         {
@@ -22,16 +20,13 @@ namespace Match3
             hud.SetRemaining($"{timeInSeconds / 60}:{timeInSeconds % 60:00}");
         }
 
-        // TODO convert this into a Coroutine for efficiency
         private void Update()
         {
-            if (timeOut) { return; }
-
-            timer += Time.deltaTime;
+            _timer += Time.deltaTime;
             hud.SetRemaining(
-                $"{(int) Mathf.Max((timeInSeconds - timer) / 60, 0)}:{(int) Mathf.Max((timeInSeconds - timer) % 60, 0):00}");
+                $"{(int) Mathf.Max((timeInSeconds - _timer) / 60, 0)}:{(int) Mathf.Max((timeInSeconds - _timer) % 60, 0):00}");
 
-            if (timeInSeconds - timer <= 0)
+            if (timeInSeconds - _timer <= 0)
             {
                 if (currentScore >= targetScore)
                 {

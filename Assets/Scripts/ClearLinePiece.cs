@@ -11,7 +11,6 @@
             if (isRow)
             {            
                 piece.GameGridRef.ClearRow(piece.Y);
-
             }
             else
             {            

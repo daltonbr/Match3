@@ -75,7 +75,6 @@ namespace Match3
             scoreText.enabled = true;
         }
 
-        // TODO reference these methods via code
         public void OnReplayClicked()
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);

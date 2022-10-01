@@ -7,9 +7,7 @@ namespace Match3
     {
         public AnimationClip clearAnimation;
 
-        private bool _isBeingCleared = false;
-
-        public bool IsBeingCleared => _isBeingCleared;
+        public bool IsBeingCleared { get; private set; }
 
         protected GamePiece piece;
 
@@ -21,13 +19,13 @@ namespace Match3
         public virtual void Clear()
         {
             piece.GameGridRef.level.OnPieceCleared(piece);
-            _isBeingCleared = true;
+            IsBeingCleared = true;
             StartCoroutine(ClearCoroutine());
         }
 
         private IEnumerator ClearCoroutine()
         {
-            Animator animator = GetComponent<Animator>();
+            var animator = GetComponent<Animator>();
 
             if (animator)
             {
