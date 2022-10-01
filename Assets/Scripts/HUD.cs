@@ -71,15 +71,15 @@ public class HUD : MonoBehaviour
     {
         switch (type)
         {
-            case LevelType.MOVES:
+            case LevelType.Moves:
                 remainingSubText.text = "moves remaining";
                 targetSubtext.text = "target score";
                 break;
-            case LevelType.OBSTACLE:
+            case LevelType.Obstacle:
                 remainingSubText.text = "moves remaining";
                 targetSubtext.text = "bubbles remaining";
                 break;
-            case LevelType.TIMER:
+            case LevelType.Timer:
                 remainingSubText.text = "time remaining";
                 targetSubtext.text = "target score";
                 break;
@@ -95,8 +95,5 @@ public class HUD : MonoBehaviour
         }
     }
 
-    public void OnGameLose()
-    {
-        gameOver.ShowLose();        
-    }
+    public void OnGameLose() => gameOver.ShowLose();
 }

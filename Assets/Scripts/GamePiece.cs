@@ -23,9 +23,9 @@ public class GamePiece : MonoBehaviour
 
     public PieceType Type => _type;
 
-    private Grid _grid;
+    private GameGrid _gameGrid;
 
-    public Grid GridRef => _grid;
+    public GameGrid GameGridRef => _gameGrid;
 
     private MovablePiece _movableComponent;
 
@@ -46,27 +46,27 @@ public class GamePiece : MonoBehaviour
         _clearableComponent = GetComponent<ClearablePiece>();
     }
 
-    public void Init(int x, int y, Grid grid, PieceType type)
+    public void Init(int x, int y, GameGrid gameGrid, PieceType type)
     {
         _x = x;
         _y = y;
-        _grid = grid;
+        _gameGrid = gameGrid;
         _type = type;
     }
 
     private void OnMouseEnter()
     {
-        _grid.EnterPiece(this);
+        _gameGrid.EnterPiece(this);
     }
 
     private void OnMouseDown()
     {
-        _grid.PressPiece(this);
+        _gameGrid.PressPiece(this);
     }
 
     private void OnMouseUp()
     {
-        _grid.ReleasePiece();
+        _gameGrid.ReleasePiece();
     }
 
     public bool IsMovable()

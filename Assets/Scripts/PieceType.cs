@@ -1,10 +1,10 @@
 public enum PieceType
 {
-    EMPTY,
-    NORMAL,
-    BUBBLE,
-    ROW_CLEAR,
-    COLUMN_CLEAR,
-    RAINBOW,
-    COUNT,
+    Empty,
+    Normal,
+    Bubble,
+    RowClear,
+    ColumnClear,
+    Rainbow,
+    Count,
 }

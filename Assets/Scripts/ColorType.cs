@@ -1,11 +1,11 @@
 public enum ColorType
 {
-    YELLOW,
-    PURPLE,
-    RED,
-    BLUE,
-    GREEN,
-    PINK,
-    ANY,
-    COUNT
+    Yellow,
+    Purple,
+    Red,
+    Blue,
+    Green,
+    Pink,
+    Any,
+    Count
 };

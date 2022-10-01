@@ -12,6 +12,6 @@
     {
         base.Clear();
 
-        piece.GridRef.ClearColor(_color);
+        piece.GameGridRef.ClearColor(_color);
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Grid : MonoBehaviour
+public class GameGrid : MonoBehaviour
 {
     [System.Serializable]
     public struct PiecePrefab
@@ -23,7 +23,6 @@ public class Grid : MonoBehaviour
     public int yDim;
     public float fillTime;
 
-    // TODO Get automatically or at least make an assertion
     public Level level;
 
     public PiecePrefab[] piecePrefabs;
@@ -86,7 +85,7 @@ public class Grid : MonoBehaviour
             {
                 if (_pieces[x, y] == null)
                 {
-                    SpawnNewPiece(x, y, PieceType.EMPTY);
+                    SpawnNewPiece(x, y, PieceType.Empty);
                 }                
             }
         }
@@ -134,12 +133,12 @@ public class Grid : MonoBehaviour
                 
                 GamePiece pieceBelow = _pieces[x, y + 1];
 
-                if (pieceBelow.Type == PieceType.EMPTY)
+                if (pieceBelow.Type == PieceType.Empty)
                 {
                     Destroy(pieceBelow.gameObject);
                     piece.MovableComponent.Move(x, y + 1, fillTime);
                     _pieces[x, y + 1] = piece;
-                    SpawnNewPiece(x, y, PieceType.EMPTY);
+                    SpawnNewPiece(x, y, PieceType.Empty);
                     movedPiece = true;
                 }
                 else
@@ -159,7 +158,7 @@ public class Grid : MonoBehaviour
                         
                         GamePiece diagonalPiece = _pieces[diagX, y + 1];
 
-                        if (diagonalPiece.Type != PieceType.EMPTY) continue;
+                        if (diagonalPiece.Type != PieceType.Empty) continue;
                         
                         bool hasPieceAbove = true;
 
@@ -171,7 +170,7 @@ public class Grid : MonoBehaviour
                             {
                                 break;
                             }
-                            else if (/*!pieceAbove.IsMovable() && */pieceAbove.Type != PieceType.EMPTY)
+                            else if (/*!pieceAbove.IsMovable() && */pieceAbove.Type != PieceType.Empty)
                             {
                                 hasPieceAbove = false;
                                 break;
@@ -183,7 +182,7 @@ public class Grid : MonoBehaviour
                         Destroy(diagonalPiece.gameObject);
                         piece.MovableComponent.Move(diagX, y + 1, fillTime);
                         _pieces[diagX, y + 1] = piece;
-                        SpawnNewPiece(x, y, PieceType.EMPTY);
+                        SpawnNewPiece(x, y, PieceType.Empty);
                         movedPiece = true;
                         break;
                     }
@@ -196,13 +195,13 @@ public class Grid : MonoBehaviour
         {
             GamePiece pieceBelow = _pieces[x, 0];
 
-            if (pieceBelow.Type != PieceType.EMPTY) continue;
+            if (pieceBelow.Type != PieceType.Empty) continue;
             
             Destroy(pieceBelow.gameObject);
-            GameObject newPiece = (GameObject)Instantiate(_piecePrefabDict[PieceType.NORMAL], GetWorldPosition(x, -1), Quaternion.identity, this.transform);
+            GameObject newPiece = (GameObject)Instantiate(_piecePrefabDict[PieceType.Normal], GetWorldPosition(x, -1), Quaternion.identity, this.transform);
 
             _pieces[x, 0] = newPiece.GetComponent<GamePiece>();
-            _pieces[x, 0].Init(x, -1, this, PieceType.NORMAL);
+            _pieces[x, 0].Init(x, -1, this, PieceType.Normal);
             _pieces[x, 0].MovableComponent.Move(x, 0, fillTime);
             _pieces[x, 0].ColorComponent.SetColor((ColorType)Random.Range(0, _pieces[x, 0].ColorComponent.NumColors));
             movedPiece = true;
@@ -242,7 +241,7 @@ public class Grid : MonoBehaviour
         _pieces[piece2.X, piece2.Y] = piece1;
 
         if (GetMatch(piece1, piece2.X, piece2.Y) != null || GetMatch(piece2, piece1.X, piece1.Y) != null
-                                                         || piece1.Type == PieceType.RAINBOW || piece2.Type == PieceType.RAINBOW)
+                                                         || piece1.Type == PieceType.Rainbow || piece2.Type == PieceType.Rainbow)
         {
             int piece1X = piece1.X;
             int piece1Y = piece1.Y;
@@ -250,7 +249,7 @@ public class Grid : MonoBehaviour
             piece1.MovableComponent.Move(piece2.X, piece2.Y, fillTime);
             piece2.MovableComponent.Move(piece1X, piece1Y, fillTime);
 
-            if (piece1.Type == PieceType.RAINBOW && piece1.IsClearable() && piece2.IsColored())
+            if (piece1.Type == PieceType.Rainbow && piece1.IsClearable() && piece2.IsColored())
             {
                 ClearColorPiece clearColor = piece1.GetComponent<ClearColorPiece>();
 
@@ -262,7 +261,7 @@ public class Grid : MonoBehaviour
                 ClearPiece(piece1.X, piece1.Y);
             }
 
-            if (piece2.Type == PieceType.RAINBOW && piece2.IsClearable() && piece1.IsColored())
+            if (piece2.Type == PieceType.Rainbow && piece2.IsClearable() && piece1.IsColored())
             {
                 ClearColorPiece clearColor = piece2.GetComponent<ClearColorPiece>();
 
@@ -277,12 +276,12 @@ public class Grid : MonoBehaviour
             ClearAllValidMatches();
 
             // special pieces get cleared, event if they are not matched
-            if (piece1.Type == PieceType.ROW_CLEAR || piece1.Type == PieceType.COLUMN_CLEAR)
+            if (piece1.Type == PieceType.RowClear || piece1.Type == PieceType.ColumnClear)
             {
                 ClearPiece(piece1.X, piece1.Y);
             }
 
-            if (piece2.Type == PieceType.ROW_CLEAR || piece2.Type == PieceType.COLUMN_CLEAR)
+            if (piece2.Type == PieceType.RowClear || piece2.Type == PieceType.ColumnClear)
             {
                 ClearPiece(piece2.X, piece2.Y);
             }
@@ -292,7 +291,6 @@ public class Grid : MonoBehaviour
 
             StartCoroutine(Fill());
 
-            // TODO consider doing this using delegates
             level.OnMove();
         }
         else
@@ -334,7 +332,7 @@ public class Grid : MonoBehaviour
 
                 if (match == null) continue;
                 
-                PieceType specialPieceType = PieceType.COUNT;
+                PieceType specialPieceType = PieceType.Count;
                 GamePiece randomPiece = match[Random.Range(0, match.Count)];
                 int specialPieceX = randomPiece.X;
                 int specialPieceY = randomPiece.Y;
@@ -344,20 +342,20 @@ public class Grid : MonoBehaviour
                 {
                     if (_pressedPiece == null || _enteredPiece == null)
                     {
-                        specialPieceType = (PieceType) Random.Range((int) PieceType.ROW_CLEAR, (int) PieceType.COLUMN_CLEAR);
+                        specialPieceType = (PieceType) Random.Range((int) PieceType.RowClear, (int) PieceType.ColumnClear);
                     }
                     else if (_pressedPiece.Y == _enteredPiece.Y)
                     {
-                        specialPieceType = PieceType.ROW_CLEAR;
+                        specialPieceType = PieceType.RowClear;
                     }
                     else
                     {
-                        specialPieceType = PieceType.COLUMN_CLEAR;
+                        specialPieceType = PieceType.ColumnClear;
                     }
                 } // Spawning a rainbow piece
                 else if (match.Count >= 5)
                 {
-                    specialPieceType = PieceType.RAINBOW;
+                    specialPieceType = PieceType.Rainbow;
                 }
 
                 for (int i = 0; i < match.Count; i++)
@@ -373,19 +371,19 @@ public class Grid : MonoBehaviour
                 }
 
                 // Setting their colors
-                if (specialPieceType == PieceType.COUNT) continue;
+                if (specialPieceType == PieceType.Count) continue;
                 
                 Destroy(_pieces[specialPieceX, specialPieceY]);
                 GamePiece newPiece = SpawnNewPiece(specialPieceX, specialPieceY, specialPieceType);
 
-                if ((specialPieceType == PieceType.ROW_CLEAR || specialPieceType == PieceType.COLUMN_CLEAR) 
+                if ((specialPieceType == PieceType.RowClear || specialPieceType == PieceType.ColumnClear) 
                     && newPiece.IsColored() && match[0].IsColored())
                 {
                     newPiece.ColorComponent.SetColor(match[0].ColorComponent.Color);
                 }
-                else if (specialPieceType == PieceType.RAINBOW && newPiece.IsColored())
+                else if (specialPieceType == PieceType.Rainbow && newPiece.IsColored())
                 {
-                    newPiece.ColorComponent.SetColor(ColorType.ANY);
+                    newPiece.ColorComponent.SetColor(ColorType.Any);
                 }
             }
         }
@@ -607,7 +605,7 @@ public class Grid : MonoBehaviour
         if (!_pieces[x, y].IsClearable() || _pieces[x, y].ClearableComponent.IsBeingCleared) return false;
         
         _pieces[x, y].ClearableComponent.Clear();
-        SpawnNewPiece(x, y, PieceType.EMPTY);
+        SpawnNewPiece(x, y, PieceType.Empty);
 
         ClearObstacles(x, y);
 
@@ -621,20 +619,20 @@ public class Grid : MonoBehaviour
         {
             if (adjacentX == x || adjacentX < 0 || adjacentX >= xDim) continue;
 
-            if (_pieces[adjacentX, y].Type != PieceType.BUBBLE || !_pieces[adjacentX, y].IsClearable()) continue;
+            if (_pieces[adjacentX, y].Type != PieceType.Bubble || !_pieces[adjacentX, y].IsClearable()) continue;
             
             _pieces[adjacentX, y].ClearableComponent.Clear();
-            SpawnNewPiece(adjacentX, y, PieceType.EMPTY);
+            SpawnNewPiece(adjacentX, y, PieceType.Empty);
         }
 
         for (int adjacentY = y - 1; adjacentY <= y + 1; adjacentY++)
         {
             if (adjacentY == y || adjacentY < 0 || adjacentY >= yDim) continue;
 
-            if (_pieces[x, adjacentY].Type != PieceType.BUBBLE || !_pieces[x, adjacentY].IsClearable()) continue;
+            if (_pieces[x, adjacentY].Type != PieceType.Bubble || !_pieces[x, adjacentY].IsClearable()) continue;
             
             _pieces[x, adjacentY].ClearableComponent.Clear();
-            SpawnNewPiece(x, adjacentY, PieceType.EMPTY);
+            SpawnNewPiece(x, adjacentY, PieceType.Empty);
         }
     }
 
@@ -661,7 +659,7 @@ public class Grid : MonoBehaviour
             for (int y = 0; y < yDim; y++)
             {
                 if ((_pieces[x, y].IsColored() && _pieces[x, y].ColorComponent.Color == color)
-                    || (color == ColorType.ANY))
+                    || (color == ColorType.Any))
                 {
                     ClearPiece(x, y);
                 }

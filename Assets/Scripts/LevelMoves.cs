@@ -8,7 +8,7 @@
 
     private void Start()
     {
-        type = LevelType.MOVES;
+        type = LevelType.Moves;
 
         hud.SetLevelType(type);
         hud.SetScore(currentScore);

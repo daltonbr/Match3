@@ -30,7 +30,7 @@ public class MovablePiece : MonoBehaviour
         _piece.Y = newY;
 
         Vector3 startPos = transform.position;
-        Vector3 endPos = _piece.GridRef.GetWorldPosition(newX, newY);
+        Vector3 endPos = _piece.GameGridRef.GetWorldPosition(newX, newY);
 
         for (float t = 0; t <= 1 * time; t += Time.deltaTime)
         {

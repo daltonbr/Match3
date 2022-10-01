@@ -12,7 +12,7 @@ public class LevelTimer : Level
 
     private void Start ()
 	{
-	    type = LevelType.TIMER;
+	    type = LevelType.Timer;
 
         hud.SetLevelType(type);
         hud.SetScore(currentScore);

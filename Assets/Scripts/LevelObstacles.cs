@@ -11,11 +11,11 @@
 
     private void Start ()
 	{
-	    type = LevelType.OBSTACLE;
+	    type = LevelType.Obstacle;
 
 	    for (int i = 0; i < obstacleTypes.Length; i++)
 	    {
-	        _numObstaclesLeft += grid.GetPiecesOfType(obstacleTypes[i]).Count;
+	        _numObstaclesLeft += gameGrid.GetPiecesOfType(obstacleTypes[i]).Count;
 	    }
 
         hud.SetLevelType(type);

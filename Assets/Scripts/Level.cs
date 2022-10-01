@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class Level : MonoBehaviour
 {
-    // TODO make an assertion and/or get automatically
-    public Grid grid;
+    public GameGrid gameGrid;
     public HUD hud;
 
     public int score1Star;
@@ -26,14 +25,14 @@ public class Level : MonoBehaviour
 
     public virtual void GameWin()
     {
-        grid.GameOver();
+        gameGrid.GameOver();
         _didWin = true;
         StartCoroutine(WaitForGridFill());
     }
 
     public virtual void GameLose()
     {        
-        grid.GameOver();
+        gameGrid.GameOver();
         _didWin = false;
         StartCoroutine(WaitForGridFill());
     }
@@ -51,7 +50,7 @@ public class Level : MonoBehaviour
 
     protected virtual IEnumerator WaitForGridFill()
     {
-        while (grid.IsFilling)
+        while (gameGrid.IsFilling)
         {
             yield return null;
         }

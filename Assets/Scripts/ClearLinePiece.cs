@@ -8,12 +8,12 @@
 
         if (isRow)
         {            
-            piece.GridRef.ClearRow(piece.Y);
+            piece.GameGridRef.ClearRow(piece.Y);
 
         }
         else
         {            
-            piece.GridRef.ClearColumn(piece.X);
+            piece.GameGridRef.ClearColumn(piece.X);
         }
     }
 }

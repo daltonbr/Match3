@@ -1,6 +1,6 @@
 public enum LevelType
 {
-    TIMER,
-    OBSTACLE,
-    MOVES,
+    Timer,
+    Obstacle,
+    Moves,
 }
