@@ -1,6 +1,6 @@
 # Match3 Game in Unity
 
-**Updated to Unity 2019.3.0f6**
+**Updated to Unity 2020.3.34f1 LTS**
 
 ![Match3gif](/DemoFiles/Match3.gif)
 
