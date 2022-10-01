@@ -6,7 +6,7 @@ namespace Match3
     public class Level : MonoBehaviour
     {
         public GameGrid gameGrid;
-        public HUD hud;
+        public Hud hud;
 
         public int score1Star;
         public int score2Star;

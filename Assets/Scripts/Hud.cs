@@ -4,9 +4,8 @@ using UnityEngine.UI;
 
 namespace Match3
 {
-    public class HUD : MonoBehaviour
+    public class Hud : MonoBehaviour
     {
-        // TODO get this automatically and/or make an assertion
         public Level level;
         public GameOver gameOver;
 
