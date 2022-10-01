@@ -1,11 +1,14 @@
-public enum ColorType
+namespace Match3
 {
-    Yellow,
-    Purple,
-    Red,
-    Blue,
-    Green,
-    Pink,
-    Any,
-    Count
-};
+    public enum ColorType
+    {
+        Yellow,
+        Purple,
+        Red,
+        Blue,
+        Green,
+        Pink,
+        Any,
+        Count
+    };
+}

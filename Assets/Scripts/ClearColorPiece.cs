@@ -1,17 +1,20 @@
-﻿public class ClearColorPiece : ClearablePiece
+﻿namespace Match3
 {
-    private ColorType _color;
-
-    public ColorType Color
+    public class ClearColorPiece : ClearablePiece
     {
-        get => _color;
-        set => _color = value;
-    }
+        private ColorType _color;
 
-    public override void Clear()
-    {
-        base.Clear();
+        public ColorType Color
+        {
+            get => _color;
+            set => _color = value;
+        }
 
-        piece.GameGridRef.ClearColor(_color);
+        public override void Clear()
+        {
+            base.Clear();
+
+            piece.GameGridRef.ClearColor(_color);
+        }
     }
 }

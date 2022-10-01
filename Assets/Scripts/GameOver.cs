@@ -2,86 +2,89 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameOver : MonoBehaviour
+namespace Match3
 {
-    public GameObject screenParent;
-    public GameObject scoreParent;
-    public Text loseText;
-    public Text scoreText;
-    public Image[] stars;
-
-    private void Start ()
-	{
-		screenParent.SetActive(false);
-
-	    for (int i = 0; i < stars.Length; i++)
-	    {
-	        stars[i].enabled = false;
-	    }
-    }
-
-    public void ShowLose()
+    public class GameOver : MonoBehaviour
     {
-        screenParent.SetActive(true);
-        scoreParent.SetActive(false);
+        public GameObject screenParent;
+        public GameObject scoreParent;
+        public Text loseText;
+        public Text scoreText;
+        public Image[] stars;
 
-        Animator animator = GetComponent<Animator>();
-
-        if (animator)
+        private void Start ()
         {
-            animator.Play("GameOverShow");
-        }
-    }
+            screenParent.SetActive(false);
 
-    public void ShowWin(int score, int starCount)
-    {
-        screenParent.SetActive(true);
-        loseText.enabled = false;
-
-        scoreText.text = score.ToString();
-        scoreText.enabled = false;
-
-        Animator animator = GetComponent<Animator>();
-
-        if (animator)
-        {
-            animator.Play("GameOverShow");
-        }
-
-        StartCoroutine(ShowWinCoroutine(starCount));
-    }
-
-    private IEnumerator ShowWinCoroutine(int starCount)
-    {
-        yield return new WaitForSeconds(0.5f);
-
-        if (starCount < stars.Length)
-        {
-            for (int i = 0; i <= starCount; i++)
+            for (int i = 0; i < stars.Length; i++)
             {
-                stars[i].enabled = true;
-
-                if (i > 0)
-                {
-                    stars[i - 1].enabled = false;
-                }
-
-                yield return new WaitForSeconds(0.5f);
+                stars[i].enabled = false;
             }
         }
 
-        scoreText.enabled = true;
-    }
+        public void ShowLose()
+        {
+            screenParent.SetActive(true);
+            scoreParent.SetActive(false);
 
-    // TODO reference these methods via code
-    public void OnReplayClicked()
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
-    }
+            Animator animator = GetComponent<Animator>();
 
-    public void OnDoneClicked()
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("LevelSelect");
-    }
+            if (animator)
+            {
+                animator.Play("GameOverShow");
+            }
+        }
 
+        public void ShowWin(int score, int starCount)
+        {
+            screenParent.SetActive(true);
+            loseText.enabled = false;
+
+            scoreText.text = score.ToString();
+            scoreText.enabled = false;
+
+            Animator animator = GetComponent<Animator>();
+
+            if (animator)
+            {
+                animator.Play("GameOverShow");
+            }
+
+            StartCoroutine(ShowWinCoroutine(starCount));
+        }
+
+        private IEnumerator ShowWinCoroutine(int starCount)
+        {
+            yield return new WaitForSeconds(0.5f);
+
+            if (starCount < stars.Length)
+            {
+                for (int i = 0; i <= starCount; i++)
+                {
+                    stars[i].enabled = true;
+
+                    if (i > 0)
+                    {
+                        stars[i - 1].enabled = false;
+                    }
+
+                    yield return new WaitForSeconds(0.5f);
+                }
+            }
+
+            scoreText.enabled = true;
+        }
+
+        // TODO reference these methods via code
+        public void OnReplayClicked()
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+        }
+
+        public void OnDoneClicked()
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("LevelSelect");
+        }
+
+    }
 }

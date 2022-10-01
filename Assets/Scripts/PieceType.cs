@@ -1,10 +1,13 @@
-public enum PieceType
+namespace Match3
 {
-    Empty,
-    Normal,
-    Bubble,
-    RowClear,
-    ColumnClear,
-    Rainbow,
-    Count,
+    public enum PieceType
+    {
+        Empty,
+        Normal,
+        Bubble,
+        RowClear,
+        ColumnClear,
+        Rainbow,
+        Count,
+    }
 }

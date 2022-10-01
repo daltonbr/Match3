@@ -1,36 +1,39 @@
-﻿public class LevelMoves : Level
+﻿namespace Match3
 {
-
-    public int numMoves;
-    public int targetScore;
-
-    private int _movesUsed = 0;
-
-    private void Start()
+    public class LevelMoves : Level
     {
-        type = LevelType.Moves;
 
-        hud.SetLevelType(type);
-        hud.SetScore(currentScore);
-        hud.SetTarget(targetScore);
-        hud.SetRemaining(numMoves);
-    }
+        public int numMoves;
+        public int targetScore;
 
-    public override void OnMove()
-    {
-        _movesUsed++;
+        private int _movesUsed = 0;
 
-        hud.SetRemaining(numMoves - _movesUsed);
-
-        if (numMoves - _movesUsed != 0) return;
-        
-        if (currentScore >= targetScore)
+        private void Start()
         {
-            GameWin();
+            type = LevelType.Moves;
+
+            hud.SetLevelType(type);
+            hud.SetScore(currentScore);
+            hud.SetTarget(targetScore);
+            hud.SetRemaining(numMoves);
         }
-        else
+
+        public override void OnMove()
         {
-            GameLose();
+            _movesUsed++;
+
+            hud.SetRemaining(numMoves - _movesUsed);
+
+            if (numMoves - _movesUsed != 0) return;
+        
+            if (currentScore >= targetScore)
+            {
+                GameWin();
+            }
+            else
+            {
+                GameLose();
+            }
         }
     }
 }

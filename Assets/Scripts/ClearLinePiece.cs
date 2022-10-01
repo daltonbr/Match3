@@ -1,19 +1,22 @@
-﻿internal class ClearLinePiece : ClearablePiece
+﻿namespace Match3
 {
-    public bool isRow;
-
-    public override void Clear()
+    internal class ClearLinePiece : ClearablePiece
     {
-        base.Clear();
+        public bool isRow;
 
-        if (isRow)
-        {            
-            piece.GameGridRef.ClearRow(piece.Y);
+        public override void Clear()
+        {
+            base.Clear();
 
-        }
-        else
-        {            
-            piece.GameGridRef.ClearColumn(piece.X);
+            if (isRow)
+            {            
+                piece.GameGridRef.ClearRow(piece.Y);
+
+            }
+            else
+            {            
+                piece.GameGridRef.ClearColumn(piece.X);
+            }
         }
     }
 }

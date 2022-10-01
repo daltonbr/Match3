@@ -1,6 +1,9 @@
-public enum LevelType
+namespace Match3
 {
-    Timer,
-    Obstacle,
-    Moves,
+    public enum LevelType
+    {
+        Timer,
+        Obstacle,
+        Moves,
+    }
 }

@@ -1,99 +1,102 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class HUD : MonoBehaviour
+namespace Match3
 {
-    // TODO get this automatically and/or make an assertion
-    public Level level;
-    public GameOver gameOver;
-
-    public Text remainingText;
-    public Text remainingSubText;
-    public Text targetText;
-    public Text targetSubtext;
-    public Text scoreText;
-    public Image[] stars;
-
-    private int _starIndex = 0;
-
-    private void Start ()
-	{
-	    for (int i = 0; i < stars.Length; i++)
-        {
-            stars[i].enabled = i == _starIndex;
-        }
-	}
-
-    public void SetScore(int score)
+    public class HUD : MonoBehaviour
     {
-        scoreText.text = score.ToString();
+        // TODO get this automatically and/or make an assertion
+        public Level level;
+        public GameOver gameOver;
 
-        int visibleStar = 0;
+        public Text remainingText;
+        public Text remainingSubText;
+        public Text targetText;
+        public Text targetSubtext;
+        public Text scoreText;
+        public Image[] stars;
 
-        if (score >= level.score1Star && score < level.score2Star)
+        private int _starIndex = 0;
+
+        private void Start ()
         {
-            visibleStar = 1;
+            for (int i = 0; i < stars.Length; i++)
+            {
+                stars[i].enabled = i == _starIndex;
+            }
         }
-        else if  (score >= level.score2Star && score < level.score3Star)
+
+        public void SetScore(int score)
         {
-            visibleStar = 2;
+            scoreText.text = score.ToString();
+
+            int visibleStar = 0;
+
+            if (score >= level.score1Star && score < level.score2Star)
+            {
+                visibleStar = 1;
+            }
+            else if  (score >= level.score2Star && score < level.score3Star)
+            {
+                visibleStar = 2;
+            }
+            else if (score >= level.score3Star)
+            {
+                visibleStar = 3;
+            }
+
+            for (int i = 0; i < stars.Length; i++)
+            {
+                stars[i].enabled = (i == visibleStar);
+            }
+
+            _starIndex = visibleStar;
         }
-        else if (score >= level.score3Star)
+
+        public void SetTarget(int target)
         {
-            visibleStar = 3;
+            targetText.text = target.ToString();
         }
 
-        for (int i = 0; i < stars.Length; i++)
+        public void SetRemaining(int remaining)
         {
-            stars[i].enabled = (i == visibleStar);
+            remainingText.text = remaining.ToString();
         }
 
-        _starIndex = visibleStar;
-    }
-
-    public void SetTarget(int target)
-    {
-        targetText.text = target.ToString();
-    }
-
-    public void SetRemaining(int remaining)
-    {
-        remainingText.text = remaining.ToString();
-    }
-
-    public void SetRemaining(string remaining)
-    {
-        remainingText.text = remaining;
-    }
-
-    public void SetLevelType(LevelType type)
-    {
-        switch (type)
+        public void SetRemaining(string remaining)
         {
-            case LevelType.Moves:
-                remainingSubText.text = "moves remaining";
-                targetSubtext.text = "target score";
-                break;
-            case LevelType.Obstacle:
-                remainingSubText.text = "moves remaining";
-                targetSubtext.text = "bubbles remaining";
-                break;
-            case LevelType.Timer:
-                remainingSubText.text = "time remaining";
-                targetSubtext.text = "target score";
-                break;
+            remainingText.text = remaining;
         }
-    }
 
-    public void OnGameWin(int score)
-    {
-        gameOver.ShowWin(score, _starIndex);
-        if (_starIndex > PlayerPrefs.GetInt(SceneManager.GetActiveScene().name, 0))
+        public void SetLevelType(LevelType type)
         {
-            PlayerPrefs.SetInt(SceneManager.GetActiveScene().name, _starIndex);
+            switch (type)
+            {
+                case LevelType.Moves:
+                    remainingSubText.text = "moves remaining";
+                    targetSubtext.text = "target score";
+                    break;
+                case LevelType.Obstacle:
+                    remainingSubText.text = "moves remaining";
+                    targetSubtext.text = "bubbles remaining";
+                    break;
+                case LevelType.Timer:
+                    remainingSubText.text = "time remaining";
+                    targetSubtext.text = "target score";
+                    break;
+            }
         }
-    }
 
-    public void OnGameLose() => gameOver.ShowLose();
+        public void OnGameWin(int score)
+        {
+            gameOver.ShowWin(score, _starIndex);
+            if (_starIndex > PlayerPrefs.GetInt(SceneManager.GetActiveScene().name, 0))
+            {
+                PlayerPrefs.SetInt(SceneManager.GetActiveScene().name, _starIndex);
+            }
+        }
+
+        public void OnGameLose() => gameOver.ShowLose();
+    }
 }
