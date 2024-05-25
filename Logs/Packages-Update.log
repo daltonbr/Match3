@@ -85,3 +85,13 @@ The following packages were updated:
   com.unity.collab-proxy from version 1.17.2 to 2.3.1
   com.unity.ide.rider from version 3.0.15 to 3.0.28
   com.unity.ide.visualstudio from version 2.0.16 to 2.0.22
+
+=== Sat May 25 14:50:58 2024
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were added:
+  com.unity.ai.navigation@1.1.5
+The following packages were updated:
+  com.unity.analytics from version 3.6.12 to 3.8.1
