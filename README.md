@@ -1,6 +1,7 @@
 # Match3 Game in Unity
 
-**Updated to Unity 2021.3.11f1 LTS**
+> [!NOTE]
+> Updated to Unity 2022.3.30f1 LTS
 
 ![Match3gif](/DemoFiles/Match3.gif)
 
