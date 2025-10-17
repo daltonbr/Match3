@@ -104,3 +104,17 @@ Update Mode: updateDependencies
 The following packages were updated:
   com.unity.ai.navigation from version 1.1.5 to 1.1.6
   com.unity.ide.rider from version 3.0.28 to 3.0.36
+
+=== Fri Oct 17 23:31:56 2025
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were added:
+  com.unity.modules.accessibility@1.0.0
+  com.unity.multiplayer.center@1.0.0
+The following packages were updated:
+  com.unity.test-framework from version 1.1.33 to 1.5.1
+  com.unity.ugui from version 1.0.0 to 2.0.0
+The following packages were removed:
+  com.unity.textmeshpro@3.0.9
