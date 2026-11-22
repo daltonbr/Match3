@@ -1,6 +1,6 @@
 # Match3 Game in Unity
 
-> Updated to Unity `6000.0.73f1` LTS
+> Updated to Unity `6000.3.29f1` LTS
 
 ![Match3gif](/DemoFiles/Match3.gif)
 
