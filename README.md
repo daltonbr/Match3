@@ -16,3 +16,10 @@ adding obstacles and new levels, detecting matches and clearing pieces, and impl
 ![Match3 - Finished Level](/DemoFiles/match3Final.png)
 
 Based on [Kelley Hecker's course](https://www.linkedin.com/learning/building-a-match-3-game-with-unity).
+
+## Input
+
+Uses Unity Input System with Active Input Handling set to **Input System Package (New)**.
+
+Press a piece, drag onto an adjacent piece, then release to attempt a swap.
+Tapping a piece or releasing outside the board cancels the gesture.
