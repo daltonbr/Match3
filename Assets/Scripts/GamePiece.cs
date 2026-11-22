@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Match3
 {
-    public class GamePiece : MonoBehaviour
+    public class GamePiece : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerUpHandler
     {
         public int score;
 
@@ -56,11 +57,27 @@ namespace Match3
             _type = type;
         }
 
-        private void OnMouseEnter() => _gameGrid.EnterPiece(this);
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            if (eventData.button == PointerEventData.InputButton.Left)
+            {
+                _gameGrid.PressPiece(this, eventData.pointerId);
+            }
+        }
 
-        private void OnMouseDown() => _gameGrid.PressPiece(this);
+        public void OnPointerEnter(PointerEventData eventData) =>
+            _gameGrid.EnterPiece(this, eventData.pointerId);
 
-        private void OnMouseUp() => _gameGrid.ReleasePiece();
+        public void OnPointerUp(PointerEventData eventData)
+        {
+            if (eventData.button != PointerEventData.InputButton.Left) return;
+
+            // The press target receives release even when the pointer leaves the board.
+            GameObject hit = eventData.pointerCurrentRaycast.gameObject;
+            GamePiece releasedPiece = hit ? hit.GetComponentInParent<GamePiece>() : null;
+            _gameGrid.EnterPiece(releasedPiece, eventData.pointerId);
+            _gameGrid.ReleasePiece(eventData.pointerId);
+        }
 
         public bool IsMovable() => _movableComponent != null;
 

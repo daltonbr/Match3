@@ -40,6 +40,7 @@ namespace Match3
 
         private GamePiece _pressedPiece;
         private GamePiece _enteredPiece;
+        private int? _activePointerId;
 
         private bool _gameOver;
 
@@ -301,16 +302,52 @@ namespace Match3
             }
         }
 
-        public void PressPiece(GamePiece piece) => _pressedPiece = piece;
-
-        public void EnterPiece(GamePiece piece) => _enteredPiece = piece;
-
-        public void ReleasePiece()
+        public void PressPiece(GamePiece piece, int pointerId)
         {
-            if (IsAdjacent (_pressedPiece, _enteredPiece))
+            if (_activePointerId.HasValue || IsFilling || _gameOver) return;
+
+            _activePointerId = pointerId;
+            _pressedPiece = piece;
+            _enteredPiece = piece;
+        }
+
+        public void EnterPiece(GamePiece piece, int pointerId)
+        {
+            if (_activePointerId != pointerId) return;
+
+            _enteredPiece = piece && piece.GameGridRef == this ? piece : null;
+        }
+
+        public void ReleasePiece(int pointerId)
+        {
+            if (_activePointerId != pointerId) return;
+
+            if (!IsFilling && !_gameOver && _pressedPiece && _enteredPiece &&
+                IsAdjacent(_pressedPiece, _enteredPiece))
             {
                 SwapPieces(_pressedPiece, _enteredPiece);
             }
+
+            CancelPointer();
+        }
+
+        private void CancelPointer()
+        {
+            _activePointerId = null;
+            _pressedPiece = null;
+            _enteredPiece = null;
+        }
+
+        private void OnDisable() => CancelPointer();
+
+        private void OnApplicationFocus(bool hasFocus)
+        {
+            if (!hasFocus) CancelPointer();
+        }
+
+        private void OnApplicationPause(bool isPaused)
+        {
+            if (isPaused) CancelPointer();
         }
 
         private bool ClearAllValidMatches()
