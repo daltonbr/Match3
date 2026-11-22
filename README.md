@@ -51,3 +51,9 @@ Before release, install the Android APK on an Android 17 device with GLES3
 support and check level selection, sprites, HUD, dragging to swap, and level
 completion. Editor rendering and a successful APK build do not validate the
 Android graphics driver. iOS exports also require device testing and signing.
+
+## License
+
+Except for third-party material, this project is licensed under the [MIT License](LICENSE).
+Third-party code and assets retain their respective licenses, including the bundled
+[OpenSans font](Assets/Fonts/OpenSans/License!.txt).
